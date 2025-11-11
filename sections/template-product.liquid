@@ -1,5 +1,8 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+{% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script> {% endcomment %}
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{% comment %} <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script> {% endcomment %}
+<script defer src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 
@@ -247,7 +250,9 @@
     customElements.define('variant-selector', VariantSelector);
   </script>
 
+
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
       const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     pagination: {
@@ -257,7 +262,8 @@
       prevEl: '.swiper-button-prev',
       nextEl: '.swiper-button-next'
     }
-      })
+      });
+    });
   </script>
 
   {% schema %}
